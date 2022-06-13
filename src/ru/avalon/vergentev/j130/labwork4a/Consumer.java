@@ -4,7 +4,7 @@ public class Consumer implements Runnable {
     private String name;
     private int delay;
     private int quantity;
-    private Storage storage;
+    private final Storage storage;
 
     public Consumer(String name, int delay, int quantity, Storage storage) {
         this.name = name;
@@ -17,8 +17,8 @@ public class Consumer implements Runnable {
     public void run() {
         for (int i = 0; i < 10; i++) {
             storage.counter(name, delay, quantity);
-            if (i == 9) System.out.println("complete Consumer");
         }
+        System.out.println("Consumer has finished.");
     }
 
     public String getName() {
@@ -49,13 +49,5 @@ public class Consumer implements Runnable {
             throw new IllegalArgumentException("Quantity must be less or equal zero");
         }
         this.quantity = quantity;
-    }
-
-    public Storage getStorage() {
-        return storage;
-    }
-
-    public void setStorage(Storage storage) {
-        this.storage = storage;
     }
 }
