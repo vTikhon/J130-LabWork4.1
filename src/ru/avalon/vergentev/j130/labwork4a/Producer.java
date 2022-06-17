@@ -16,7 +16,7 @@ public class Producer implements Runnable {
         for (int i = 0; i < 10; i++) {
             try {
                 Thread.sleep(delay);
-                storage.counter(delay, quantity);
+                storage.counter(quantity);
             } catch (InterruptedException e) {
                 System.out.println("Error in run method Producer class: " + e.getMessage());
             }

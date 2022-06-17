@@ -7,7 +7,7 @@ public class Storage {
         this.itemsQuantity = itemsQuantity;
     }
 
-    public synchronized boolean counter (int delay, int quantity) {
+    public synchronized boolean counter (int quantity) {
         if ((itemsQuantity + quantity) >= 0) {
             itemsQuantity = itemsQuantity + quantity;
             System.out.println(Thread.currentThread().getName() + " changed available quantity to: " + itemsQuantity);

@@ -15,7 +15,7 @@ public class Consumer implements Runnable {
     public void run() {
         for (int i = 0; i < 10; i++) {
             try {
-                while (!storage.counter(delay, quantity)) {
+                while (!storage.counter(quantity)) {
                     Thread.sleep(delay);
                 }
             } catch (InterruptedException e) {
