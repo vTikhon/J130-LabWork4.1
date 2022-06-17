@@ -7,27 +7,14 @@ public class Storage {
         this.itemsQuantity = itemsQuantity;
     }
 
-    public synchronized void counter (String name, int delay, int quantity) {
+    public synchronized boolean counter (int delay, int quantity) {
         if ((itemsQuantity + quantity) >= 0) {
             itemsQuantity = itemsQuantity + quantity;
-            System.out.println(name + " changed available quantity to: " + itemsQuantity);
-            try {
-                //время задержки после поставки
-                Thread.sleep(delay);
-                //возобновляем все другие потоки
-                notifyAll();
-                //приостанавливаем текущий поток
-                wait();
-            } catch (InterruptedException e) {
-                System.out.println("Error1 in counter method: " + e.getMessage());
-            }
+            System.out.println(Thread.currentThread().getName() + " changed available quantity to: " + itemsQuantity);
+            return true;
         } else {
-            System.out.println(name + " is waiting for " + -1*quantity + " items. Current quantity: " + itemsQuantity);
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                System.out.println("Error2 in counter method: " + e.getMessage());
-            }
+            System.out.println(Thread.currentThread().getName() + " is waiting for " + -1*quantity + " items. Current quantity: " + itemsQuantity);
+            return false;
         }
     }
 
